@@ -4,11 +4,6 @@ import itertools as itools
 import functools as ftools
 from operator import add
 
-def printd(debug_msg):
-    if debug:
-        print(debug_msg)
-    return None
-
 def calculate_probability(class_distribution: list[int]) -> int:
     total_seats = ftools.reduce(add, class_distribution)
     result = []
@@ -16,16 +11,10 @@ def calculate_probability(class_distribution: list[int]) -> int:
         your_probability = fractions.Fraction(class_size, total_seats)
         friend_probability = fractions.Fraction(total_seats - class_size, total_seats - 1)
         result.append(your_probability * friend_probability)
-        printd(f"For {class_size}: {your_probability * friend_probability}")
     result = ftools.reduce(add, result)
     return result
 
 def main(argv) -> int:
-    if '--debug' in argv:
-        global debug
-        debug = True
-
-
     CLASS_UPPER_SIZE: int = int(input('How many total students are there?                 # ')) # Maximum size of the class* (meaning classes like APUSH or AP Lang, not specific classes)
     CLASS_LOWER_SIZE: int = int(input('What is the smallest a class can get?              # ')) # Minimum size of the class*
     CLASS_DIVISION: int = int(input('How many classes are there?                        # ')) # How many classes there are
