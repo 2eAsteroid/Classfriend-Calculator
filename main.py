@@ -16,6 +16,7 @@ def calculate_probability(class_distribution: list[int]) -> int:
         your_probability = fractions.Fraction(class_size, total_seats)
         friend_probability = fractions.Fraction(total_seats - class_size, total_seats - 1)
         result.append(your_probability * friend_probability)
+        printd(f"For {class_size}: {your_probability * friend_probability}")
     result = ftools.reduce(add, result)
     return result
 
